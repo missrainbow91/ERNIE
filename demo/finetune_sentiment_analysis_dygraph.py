@@ -57,7 +57,7 @@ if __name__ == '__main__':
     parser.add_argument('--eval', action='store_true')
     parser.add_argument('--save_dir', type=str, default=None, help='model output directory')
     parser.add_argument('--wd', type=float, default=0.01, help='weight decay, aka L2 regularizer')
-
+    parser.add_argument('--num_labels', type=int, default=23, help='numbers of labels')
 
     args = parser.parse_args()
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     place = F.CUDAPlace(0)
     with FD.guard(place):
-        model = ErnieModelForSequenceClassification.from_pretrained(args.from_pretrained, num_labels=3, name='')
+        model = ErnieModelForSequenceClassification.from_pretrained(args.from_pretrained, num_labels=args.num_labels, name='')
         if not args.eval:
             feature_column = propeller.data.FeatureColumns([
                 propeller.data.TextColumn('seg_a', unk_id=tokenizer.unk_id, vocab_dict=tokenizer.vocab, tokenizer=tokenizer.tokenize),
