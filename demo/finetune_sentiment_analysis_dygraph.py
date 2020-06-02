@@ -57,7 +57,7 @@ if __name__ == '__main__':
     parser.add_argument('--eval', action='store_true')
     parser.add_argument('--save_dir', type=str, default=None, help='model output directory')
     parser.add_argument('--wd', type=float, default=0.01, help='weight decay, aka L2 regularizer')
-    parser.add_argument('--num_labels', type=int, default=23, help='numbers of labels')
+    parser.add_argument('--num_labels', type=int, required=True, help='numbers of labels')
 
     args = parser.parse_args()
 
